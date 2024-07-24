@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_app_showing_carousel_slider_with_dots_indicator/views/home_viewe.dart';
+import 'package:simple_app_showing_carousel_slider_with_dots_indicator/views/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeViewe(),
+      home: const HomeView(),
     );
   }
 }

@@ -1,17 +1,19 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app_showing_carousel_slider_with_dots_indicator/models/carousel_slider_model.dart';
-import 'package:simple_app_showing_carousel_slider_with_dots_indicator/views/datails_view.dart';
+import 'package:simple_app_showing_carousel_slider_with_dots_indicator/views/all_plants_view.dart';
+import 'package:simple_app_showing_carousel_slider_with_dots_indicator/views/details_view.dart';
 
-class HomeViewe extends StatefulWidget {
-  const HomeViewe({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomeViewe> createState() => _HomeVieweState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeVieweState extends State<HomeViewe> {
+class _HomeViewState extends State<HomeView> {
   List<CarouselSliderModel> dummyData = [
     CarouselSliderModel(
       image: "assets/images/1.png",
@@ -39,9 +41,15 @@ class _HomeVieweState extends State<HomeViewe> {
       price: 90,
     ),
   ];
-
+  List<IconData> iconsList = [
+    Icons.home,
+    Icons.account_circle_outlined,
+    Icons.favorite,
+    Icons.archive_outlined,
+  ];
   CarouselController carouselController = CarouselController();
   int currentIndexPosition = 0;
+  int bottomNavIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,6 +132,41 @@ class _HomeVieweState extends State<HomeViewe> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xffc5e2ce),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AllPlantsView(
+                        items: dummyData,
+                      )));
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: buildAnimatedBottomNavigationBar(),
+    );
+  }
+
+  AnimatedBottomNavigationBar buildAnimatedBottomNavigationBar() {
+    return AnimatedBottomNavigationBar.builder(
+      itemCount: iconsList.length,
+      tabBuilder: (int index, bool isActive) {
+        return Icon(
+          iconsList[index],
+          size: 24,
+          color: isActive ? const Color(0xff114928) : Colors.grey,
+        );
+      },
+      activeIndex: bottomNavIndex,
+      gapLocation: GapLocation.center,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
+      leftCornerRadius: 32,
+      rightCornerRadius: 32,
+      onTap: (index) => setState(() => bottomNavIndex = index),
+      //other params
     );
   }
 
@@ -183,9 +226,10 @@ class _HomeVieweState extends State<HomeViewe> {
           ),
           child: Center(
               child: Text(
-            '${price.toString()}\$',
+            '\$${price.toString()}',
             style: const TextStyle(color: Color(0xff7eba3e)),
           ))),
     );
   }
+
 }

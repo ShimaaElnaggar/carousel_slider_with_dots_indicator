@@ -32,15 +32,17 @@ class DetailsView extends StatelessWidget {
               child: Center(
                 child: ListTile(
                   leading: Container(
-                      height: 70,
-                      width: 70,
+                      height: 60,
+                      width: 60,
                       decoration: BoxDecoration(
-                        color:const Color(0xffc5e2ce),
+                        color: const Color(0xffc5e2ce),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(item.image),
+                        child: Image.asset(
+                          item.image,
+                        ),
                       )),
                   title: Text(
                     item.title,

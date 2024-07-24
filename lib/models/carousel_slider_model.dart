@@ -1,5 +1,3 @@
-
-
 class CarouselSliderModel {
   final String image;
   final String title;
