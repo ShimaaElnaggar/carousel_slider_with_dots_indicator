@@ -128,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
                 });
               }),
             ),
-            buildDotsIndicator(),
+            buildDotsIndicator(carouselController),
           ],
         ),
       ),
@@ -165,14 +165,15 @@ class _HomeViewState extends State<HomeView> {
       notchSmoothness: NotchSmoothness.verySmoothEdge,
       leftCornerRadius: 32,
       rightCornerRadius: 32,
-      onTap: (index) => setState(() => bottomNavIndex = index),
+      onTap: (index) => setState(() => bottomNavIndex = index ),
       //other params
     );
   }
 
-  Center buildDotsIndicator() {
+  Center buildDotsIndicator(CarouselController carouselController) {
     return Center(
       child: DotsIndicator(
+        onTap: carouselController.animateToPage,
         dotsCount: dummyData.length,
         position: currentIndexPosition,
         decorator: DotsDecorator(
